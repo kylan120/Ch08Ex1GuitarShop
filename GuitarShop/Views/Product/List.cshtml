@@ -50,5 +50,12 @@
                 }
             </tbody>
         </table>
+        @{
+            string userMessage = TempData?["UserMessage"]?.ToString() ?? "";
+        }
+        @if (userMessage != "")
+        {
+            <div class="text-success">@userMessage</div>
+        }
     </div>
 </div>

@@ -86,17 +86,21 @@ namespace GuitarShop.Areas.Admin.Controllers
         [HttpPost]
         public IActionResult Update(Product product)
         {
+            string message = "";
             if (ModelState.IsValid)
             {
-                if (product.ProductID == 0)           // new product
+                if (product.ProductID == 0)          
                 {
                     context.Products.Add(product);
+                    message = "You just added the product" + product.Name;
                 }
                 else                                  // existing product
                 {
                     context.Products.Update(product);
+                    message = "You just updated the product" + product.Name;
                 }
                 context.SaveChanges();
+                TempData["UserMessage"] = message;
                 return RedirectToAction("List");
             }
             else
